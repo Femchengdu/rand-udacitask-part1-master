@@ -25,7 +25,5 @@ class Item
     def initialize(item_description)
     	@description = item_description
     	@completion_status = false
-    end	 
-
-    
+    end	   
 end
