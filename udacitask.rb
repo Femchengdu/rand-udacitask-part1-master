@@ -36,7 +36,7 @@ def print_list title, item_list
 	print_list_headding title
     format_items item_list
 end
-
+=begin
 # save user
 
 def save_user user
@@ -46,16 +46,7 @@ def save_user user
 		puts "Problem saving #{user.name}"
 	end		
 end	
-
-# List users
-def users
-	results = User.list_users
-	results.each do |user|
-		puts user.name
-		format_items user.todolist.items
-	end	
-end	
-
+=end
 # Old way
 julia = User.new "Julia", "Julia's Stuff", "todolist.txt"
 
