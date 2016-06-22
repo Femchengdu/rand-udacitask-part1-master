@@ -4,20 +4,33 @@ class TodoList
     # Create a reader for the title and items	
     attr_reader :title, :items, :print_file
     attr_writer :title
-    # Initialize todo list with a title and no items
-    def initialize(list_title)
+    # Initialize todo list with a title and empty items array
+    def initialize(list_title, file)
     	@title = list_title
     	@items = Array.new
-        @print_file = File.new("todolist.txt", "w+")
+        @print_file = File.new(file, "w+")
     end   
 
     # Create a new Item and adds it to the array of items
-    def add_item(new_item)
-    	item = Item.new(new_item)
-    	@items.push(item)
+    def add_item new_item
+    	item = Item.new new_item
+    	@items.push item
     end	
 end
 
+# User class
+class User
+    attr_reader :todolist, :name
+
+    @@users = []
+
+
+    def initialize name, list_title, file
+        @name = name
+        @todolist = TodoList.new list_title, file
+    end     
+end
+# Item class
 class Item
     # methods and stuff go here
     attr_reader :description, :completion_status
@@ -29,9 +42,10 @@ class Item
     end	   
 end
 
-
+# Class for user interaction
 class UserInteraction
 
+    attr_reader :new_user
     class Config
         @@actions = ['title', 'add', 'delete', 'update', 'print', 'quit']
 
@@ -40,15 +54,25 @@ class UserInteraction
         end
     end
 
+    # create user
+    def create_user
+        print "Type a user name: "
+        name = gets.chomp
+        print "Type a list title: "
+        title = gets.chomp
+        print "Type the file name with the .txt extension: "
+        file = gets.chomp
+        User.new name, title, file
+    end 
+    # Method to initialize the user object
     def initialize
         # Start the user interaction
         puts "  "
-        puts ".................Initializing interactive interface! ............."   
-        puts "  " 
+        puts ".................Initializing interactive interface! ............." 
+        @new_user = create_user   
     end
 
     # Add item to the list
-
     def add list_object
         puts "\nAdd a new list item:  \n\n"
         list_item = gets.chomp.strip
@@ -90,10 +114,7 @@ class UserInteraction
         puts "\nTitle updated!! \n\n"
     end
 
-    # Formating output to the screen
-
     # List headding
-
     def print_list_headding txt
         head = Artii::Base.new :font => 'slant'
         puts " ---------------------------------------------------------- "
@@ -113,19 +134,11 @@ class UserInteraction
         end
     end 
 
-    # Method to print the list
+    # Method to print the list to the command line
     def print_list title, item_list
         print_list_headding title
         format_items item_list
     end
-=begin
-    # Update the title of the list
-    def set_list_file list_object
-        print "Type the name of the file to write to: "
-        list_file = gets.chomp.strip
-        list_object.print_file = new_title
-    end
-=end
 
     # Method to write the list to a file
     def list_to_file list_object
@@ -144,7 +157,7 @@ class UserInteraction
         $stdout = old_out
     end
 
-
+    # Method to get the action from user
     def get_action
         action = nil
         # Ask for user input until we get a valid response
@@ -157,7 +170,7 @@ class UserInteraction
 
         return action
     end   
-
+    # Method to do the selected action
     def do_action(action, list_object)
         # do some action with the key word
         case action
@@ -179,7 +192,7 @@ class UserInteraction
             puts "\n Wrong command.\n"
         end 
     end 
-    
+    # Method to launch the user interaction    
     def launch_user_interaction! list_object
         # Introduction to the todo lists
         introduction
@@ -193,7 +206,7 @@ class UserInteraction
         # Conclusion
         conclusion
     end
-
+    # Method to print intorductory instructions
     def introduction
         puts "\n\n<<<< Welcome to the Todo List program >>>>\n\n"
         puts "\n\n<<<<<<<This is an interactive guide to help you manage your todo list.>>>>>>>>\n\n"
@@ -201,6 +214,7 @@ class UserInteraction
         puts "\n\n<<<< delete: This deletes an item from the list>>>>\n\n"
         puts "\n\n<<<< update: This updates the completion status of an item on the list>>>>\n\n"
         puts "\n\n<<<< title: This changes the title of the list>>>>\n\n"
+        puts "\n\n<<<< print: This prints the list to the command line.>>>>\n\n"
         puts "\n\n<<<< quit: This quits the interactive menu and writes the list to a file>>>>\n\n"
         puts "Hit any key followed by enter to proceed...........\n\n"
     end
@@ -208,5 +222,4 @@ class UserInteraction
     def conclusion  
         puts "\n<<<< Goodbye! >>>>\n\n\n"
     end 
-
 end    
