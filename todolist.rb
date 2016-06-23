@@ -42,8 +42,6 @@ class TodoList
     def print_title
         print_list_headding @title
     end
-
-
 end
 
 # User class
@@ -144,24 +142,6 @@ class UserInteraction
         puts "\nTitle updated!! \n\n"
     end
 
-    # Method to format the items output
-=begin
-    def format_items items_array
-        count = 0
-        items_array.each do |block_variable|
-            description = block_variable.description + "                        "
-            status = block_variable.completion_status
-            count += 1
-            puts "#{count} - #{description[0..20]}Completed: #{status}"
-        end
-    end 
-
-    # Method to print the list to the command line
-    def print_list title, item_list
-        print_list_headding title
-        format_items item_list
-    end
-=end
     # Method to write the list to a file
     def list_to_file list_object
         puts "Writing todo list to file........."
@@ -172,7 +152,6 @@ class UserInteraction
         # Set stdout to textfile
         $stdout = report_file
         # Print the todo list
-        #print_list list_object.title, list_object.items
         list_object.print_title
         list_object.list_items   
         # Close file

@@ -1,20 +1,6 @@
 require_relative 'todolist.rb'
 require 'artii'
-=begin
-# Method to print headding in ascii art
-def print_list_headding txt
-	head = Artii::Base.new :font => 'slant'
-	puts " ---------------------------------------------------------- "
-	puts head.asciify txt
-	puts " ---------------------------------------------------------  "
-	puts "  "
-end
 
-# Method to print the title
-def print_title title
-	print_list_headding title
-end
-=end
 # Initialize todo list
 julia = User.new "Julia", "Julia's Stuff", "todolist.txt"
 
