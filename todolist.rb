@@ -2,8 +2,8 @@ class TodoList
     # methods and stuff go here
     
     # Create a reader for the title and items	
-    attr_reader :title, :items, :print_file
-    attr_writer :title
+    attr_reader :print_file, :items
+    attr_accessor :title
     # Initialize todo list with a title and empty items array
     def initialize(list_title, file)
     	@title = list_title
@@ -16,30 +16,60 @@ class TodoList
     	item = Item.new new_item
     	@items.push item
     end	
+
+    # Method to format the items output
+    def list_items
+        count = 0
+        @items.each do |block_variable|
+            item_desc = block_variable.description + "            "
+            status = block_variable.completed?
+            count += 1
+        puts "#{count} - #{item_desc[0..20]}Completed: #{status}"
+        end    
+    end  
+
+
+    # Method to print headding in ascii art
+    def print_list_headding txt
+        head = Artii::Base.new :font => 'slant'
+        puts " ---------------------------------------------------------- "
+        puts head.asciify txt
+        puts " ---------------------------------------------------------  "
+        puts "  "
+    end
+
+    # Method to print the title
+    def print_title
+        print_list_headding @title
+    end
+
+
 end
 
 # User class
 class User
     attr_reader :todolist, :name
 
-    @@users = []
-
-
     def initialize name, list_title, file
         @name = name
         @todolist = TodoList.new list_title, file
     end     
 end
+
 # Item class
 class Item
     # methods and stuff go here
-    attr_reader :description, :completion_status
+    attr_reader :description
     attr_writer :completion_status
     # Initialize items on a todo list
-    def initialize(item_description)
+    def initialize item_description
     	@description = item_description
     	@completion_status = false
-    end	   
+    end	 
+
+    def completed?
+        @completion_status
+    end    
 end
 
 # Class for user interaction
@@ -114,16 +144,8 @@ class UserInteraction
         puts "\nTitle updated!! \n\n"
     end
 
-    # List headding
-    def print_list_headding txt
-        head = Artii::Base.new :font => 'slant'
-        puts " ---------------------------------------------------------- "
-        puts head.asciify txt
-        puts " ---------------------------------------------------------  "
-        puts "  "
-    end
-
     # Method to format the items output
+=begin
     def format_items items_array
         count = 0
         items_array.each do |block_variable|
@@ -139,7 +161,7 @@ class UserInteraction
         print_list_headding title
         format_items item_list
     end
-
+=end
     # Method to write the list to a file
     def list_to_file list_object
         puts "Writing todo list to file........."
@@ -150,7 +172,9 @@ class UserInteraction
         # Set stdout to textfile
         $stdout = report_file
         # Print the todo list
-        print_list list_object.title, list_object.items
+        #print_list list_object.title, list_object.items
+        list_object.print_title
+        list_object.list_items   
         # Close file
         report_file.close
         # Reset stdout
@@ -179,7 +203,9 @@ class UserInteraction
         when 'add'
             add list_object
         when 'print'
-            print_list list_object.title, list_object.items   
+            #print_list list_object.title, list_object.items
+            list_object.print_title
+            list_object.list_items   
         when 'delete'
             deleting_item list_object
         when 'update'
