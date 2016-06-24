@@ -5,31 +5,32 @@ require 'artii'
 julia = User.new "Julia", "Julia's Stuff", "todolist.txt"
 
 # Method to add a four new items
-julia.todolist.add_item("Do laundry")
-julia.todolist.add_item("Feed the cat")
-julia.todolist.add_item("Buy cereal")
-julia.todolist.add_item("Go dancing!")
+julia.todolist.create_item("Do laundry")
+julia.todolist.create_item("Feed the cat")
+julia.todolist.create_item("Buy cereal")
+julia.todolist.create_item("Go dancing!")
 
 # Print the list
 julia.todolist.print_title
 julia.todolist.list_items
 
 # Delete the first item
-julia.todolist.items.delete_at(0)
+julia.todolist.delete_item 0
+
 
 # Print the list
 julia.todolist.print_title
 julia.todolist.list_items
 
 # Delete the second item
-julia.todolist.items.delete_at(1)
+julia.todolist.delete_item 1
 
 # Print the list
 julia.todolist.print_title
 julia.todolist.list_items
 
 # Update the completion status of the first item to complete
-julia.todolist.items[0].completion_status = true
+julia.todolist.update_item_status 0, true
 
 # Print the list
 julia.todolist.print_title
@@ -41,7 +42,6 @@ julia.todolist.title = "My Todo List"
 # Print the list
 julia.todolist.print_title
 julia.todolist.list_items
-
 
 # Initialize user interaction
 user_interaction = UserInteraction.new

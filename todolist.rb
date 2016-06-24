@@ -2,30 +2,32 @@ class TodoList
     # methods and stuff go here
     
     # Create a reader for the title and items	
-    attr_reader :print_file, :items
+    attr_reader :print_file
     attr_accessor :title
     # Initialize todo list with a title and empty items array
     def initialize(list_title, file)
     	@title = list_title
-    	@items = Array.new
         @print_file = File.new(file, "w+")
     end   
 
     # Create a new Item and adds it to the array of items
-    def add_item new_item
-    	item = Item.new new_item
-    	@items.push item
+    def create_item new_item
+    	Item.add_list_item new_item
     end	
 
-    # Method to format the items output
+    #Delete an item from the list
+    def delete_item position
+        Item.delete_list_item position
+    end  
+
+    # Update item status
+    def update_item_status position, value
+        Item.update_status_at position, value
+    end    
+
+    # Method to print the items
     def list_items
-        count = 0
-        @items.each do |block_variable|
-            item_desc = block_variable.description + "            "
-            status = block_variable.completed?
-            count += 1
-        puts "#{count} - #{item_desc[0..20]}Completed: #{status}"
-        end    
+       Item.format_list      
     end  
 
 
@@ -38,7 +40,7 @@ class TodoList
         puts "  "
     end
 
-    # Method to print the title
+    # Method to print the list title
     def print_title
         print_list_headding @title
     end
@@ -47,7 +49,7 @@ end
 # User class
 class User
     attr_reader :todolist, :name
-
+    # Initialize and interactive user
     def initialize name, list_title, file
         @name = name
         @todolist = TodoList.new list_title, file
@@ -56,6 +58,8 @@ end
 
 # Item class
 class Item
+    # The items arrary
+    @@list_items = []
     # methods and stuff go here
     attr_reader :description
     attr_writer :completion_status
@@ -63,10 +67,45 @@ class Item
     def initialize item_description
     	@description = item_description
     	@completion_status = false
-    end	 
+    end	
 
+    # Add an item to the list array
+    def self.add_list_item description
+        new_item = Item.new description
+        @@list_items.push new_item
+    end
+
+    # Delete a list item form the list array
+    def self.delete_list_item position
+        @@list_items.delete_at position
+        puts "\n\nList item deleted at position - #{position.to_i + 1}\n\n"
+    end  
+
+    # Update status at position
+    def self.update_status_at position, value
+        @@list_items.at(position).completion_status = value
+        puts "\n\n Status updated! \n\n"
+    end      
+
+    # Return the completion status of the item    
     def completed?
         @completion_status
+    end 
+
+    # A list of the items
+    def self.list_of_items
+        @@list_items
+    end    
+    
+    # Format the list of items
+    def self.format_list
+        count = 0
+        @@list_items.each do |block_variable|
+            item_desc = block_variable.description + "                "
+            status = block_variable.completed?
+            count += 1
+        puts "#{count} - #{item_desc[0..20]}Completed: #{status}"
+        end     
     end    
 end
 
@@ -93,6 +132,7 @@ class UserInteraction
         User.new name, title, file
     end 
     # Method to initialize the user object
+
     def initialize
         # Start the user interaction
         puts "  "
@@ -104,7 +144,7 @@ class UserInteraction
     def add list_object
         puts "\nAdd a new list item:  \n\n"
         list_item = gets.chomp.strip
-        list_object.add_item list_item
+        list_object.create_item list_item
         puts "\nlist item added!! \n\n"
     end 
 
@@ -113,9 +153,10 @@ class UserInteraction
         print "Type the number of the list item to delete: "
         position = gets.chomp.strip
         unless position == 1
-            list_object.items.delete_at(position.to_i - 1) 
+            list_object.delete_item(position.to_i - 1) 
+            #items.delete_at
         else
-            list_object.items.delete_at(0)     
+            list_object.delete_item(0)     
         end    
     end    
 
@@ -126,11 +167,10 @@ class UserInteraction
         print "Type list item status: "
         status = gets.chomp.strip
         unless position == 1
-            list_object.items[position.to_i - 1].completion_status = status
+            list_object.update_item_status position.to_i - 1, status
         else 
-            list_object.items[0].completion_status = status  
+            list_object.update_item_status 0, status  
         end  
-        puts "\nStatus updated!! \n\n"   
     end    
 
 
