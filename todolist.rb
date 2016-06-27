@@ -16,18 +16,7 @@ class TodoList
     	item = Item.new new_item
     	@items.push item
     end	
-=begin
-    # Method to format the items output
-    def list_items
-        count = 0
-        @items.each do |block_variable|
-            item_desc = block_variable.description + "            "
-            status = block_variable.completed?
-            count += 1
-        puts "#{count} - #{item_desc[0..20]}Completed: #{status}"
-        end    
-    end  
-=end
+    # Method to write the list
     def list_items
         count = 0
         @items.each do |block_variable|
@@ -71,20 +60,18 @@ class Item
     	@description = item_description
     	@completion_status = false
     end	 
-
+    # Method for the completion status
     def completed?
          @completion_status
     end 
-
+    # Method for the description
     def print_description
         item_desc = @description + "            "
     end  
-
+    # Method to format the list item
     def format_output block_variable, count
         puts "#{count} - #{block_variable.print_description[0..20]} completed: #{block_variable.completed?}"
     end    
-
-
 end
 
 # Class for user interaction
