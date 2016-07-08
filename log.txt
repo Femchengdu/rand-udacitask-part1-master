@@ -1,0 +1,77 @@
+commit f0b112552c62dd35b1cf7f8684f69d915f7b9ec0
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Mon Jun 27 22:06:29 2016 +0800
+
+    Cleaned up the todolist code
+
+commit 6a3f867641116daf183e351879b499ce2bf0cc61
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Mon Jun 27 21:09:11 2016 +0800
+
+    Added Item class instance method to format output
+
+commit e28ecddf17ce55b47e30199199e29c534bb2e987
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Fri Jun 24 16:17:36 2016 +0800
+
+    Final commit after the second review
+
+commit 886731db67afea6dd9bd355b0433e5aecd6e441c
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Thu Jun 23 23:45:13 2016 +0800
+
+    Ready for submittion :-)
+
+commit b5e184c3da644d7254f8853caea866b2464c87b9
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Thu Jun 23 23:39:44 2016 +0800
+
+    Final Commit after code review
+
+commit 7eaa4664c6a864c93adb0d50cedda7f6e2de81d7
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Wed Jun 22 16:50:14 2016 +0800
+
+    Final commit for the project:-)
+
+commit 64f42c1e3677364a7c540fd6b4ebd4494085cae5
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Wed Jun 22 16:32:51 2016 +0800
+
+    Cleaned up the code with some refactoring.
+
+commit 8a219d978159e6f2c098fbf84de009a51b2cdcbd
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Wed Jun 15 14:48:47 2016 +0800
+
+    Added function to write todo list to file
+
+commit d36b301bf580da8614630a6d8598cd77e0498edc
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Tue Jun 14 02:06:18 2016 +0800
+
+    Added user interaction
+
+commit 382b7000c6749c284df151d8b4769a2f3b4e3b7c
+Author: Ajayi Oluwafemi <FanMiao@192.168.0.102>
+Date:   Wed Jun 8 11:47:26 2016 +0800
+
+    Initial commit before adding new features
+
+commit 540c7a656e4f39f0a524d4d9b2985e34fa7f4d5e
+Author: Ajayi Oluwafemi <FanMiao@192.168.0.102>
+Date:   Sun Jun 5 22:08:25 2016 +0800
+
+    Defined formatting methods for headding and items
+
+commit d37e7b63938c0f6cee55a544116964a8c9b4d8b8
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Sun Jun 5 13:34:53 2016 +0800
+
+    Initial solution
+
+commit 7b727a41ad036f62958ce8d58127e88b544cc43c
+Author: Ajayi Oluwafemi <FanMiao@Ajayis-MacBook-Air.local>
+Date:   Thu Jun 2 11:33:44 2016 +0800
+
+    Initial Commit
